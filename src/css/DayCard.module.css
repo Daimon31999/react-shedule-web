@@ -1,0 +1,22 @@
+/* td, th {
+  padding: 0 60px;
+} */
+
+/* th, td {
+  text-align: left;
+  padding: 0px 60px;
+} */
+
+table {
+  border-spacing: 10px;
+}
+
+@media (max-width: 1024px) {
+  table {
+    border-spacing: 2px;
+  }
+}
+
+th, td {
+  border: 4px solid #017383;
+}
