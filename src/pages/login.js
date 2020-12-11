@@ -36,9 +36,9 @@ export default function Login() {
     })
       .then((res) => {
         getUser()
-        let str = window.location.href
-        let splitted = str.split('login').join('')
-        window.location.href = splitted
+        // let str = window.location.href
+        // let splitted = str.split('login').join('')
+        // window.location.href = splitted
       })
       .catch((err) => {
         setError(true)
@@ -63,6 +63,7 @@ export default function Login() {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/user`,
     }).then((res) => {
+      console.log('user', res.data)
       setData(res.data)
       setIsLoaded(true)
     })
