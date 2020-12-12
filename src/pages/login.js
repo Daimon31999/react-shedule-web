@@ -48,6 +48,7 @@ export default function Login() {
     Axios.request({
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/logout`,
       method: 'get',
+      withCredentials: true,
       headers: {
         Cookie: 'connect.sid=0;',
       },
