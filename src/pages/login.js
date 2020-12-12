@@ -45,7 +45,13 @@ export default function Login() {
       })
   }
   const logout = () => {
-    Axios.get(`${process.env.REACT_APP_BASE_SERVER_URL}/logout`)
+    Axios.request({
+      url: `${process.env.REACT_APP_BASE_SERVER_URL}/logout`,
+      method: 'get',
+      headers: {
+        Cookie: 'connect.sid=0;',
+      },
+    })
       .then(function (response) {
         // handle success
         // document.cookie = 'connect.sid=hello'
