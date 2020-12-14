@@ -48,27 +48,30 @@ export default function DayCard({ day, setData, data, setAlert, parity }) {
   }
   return (
     <div>
-      <div className='h-16 bg-admin-blue-lite text-admin-blue font-bold border-4 border-admin-blue lg:mx-10 my-6 flex items-center px-4 lg:px-10 text-2xl capitalize'>
+      <div className='h-16 bg-admin-blue-lite text-admin-blue font-bold border-4 border-admin-blue md:mx-6 md:mx-10 my-6 flex items-center px-4 md:px-10 text-2xl capitalize'>
         <span>{translateToRussian[day]}</span>
       </div>
-      <table className='w-auto mx-4 lg:mx-20 border-separate'>
+      <table className='w-auto mx-4 md:mx-20 border-separate'>
         <tbody>
-          <tr className='h-14 bg-admin-blue-lite text-black font-bold mx-4 lg:mx-20 px-1 lg:px-10 text-base lg:text-xl capitalize'>
-            <th className='px-1 lg:px-10 text-left break-all'>пара</th>
-            <th className='px-1 lg:px-10 text-left break-all'>сокращение</th>
-            <th className='px-1 lg:px-10 text-left'>
+          <tr className='h-14 bg-admin-blue-lite text-black font-bold mx-4 md:mx-20 px-1 md:px-10 text-base md:text-xl capitalize'>
+            <th className='px-1 lg:px-10 text-center'>пара</th>
+            <th className='px-1 lg:px-10 text-left hidden md:table-cell'>
+              сокращение
+            </th>
+            <th className='px-1 lg:px-10 text-left md:hidden'>сокр</th>
+            <th className='px-1 md:px-10 text-left'>
               полное название предмета
             </th>
           </tr>
           {data.shedule[parity][day].map((lesson, index) => (
             <tr
               key={index}
-              className='h-14 bg-admin-blue-lite text-admin-blue font-bold text-base lg:text-xl capitalize'>
-              <td className='px-1 lg:px-10'>{index + 1}</td>
-              <td className='px-1 lg:px-10'>{getAbbreviation(lesson)}</td>
+              className='h-14 bg-admin-blue-lite text-admin-blue font-bold text-base md:text-xl capitalize'>
+              <td className='px-1 md:px-10'>{index + 1}</td>
+              <td className='px-1 md:px-10'>{getAbbreviation(lesson)}</td>
               <td className='w-100'>
                 <input
-                  className='px-1 lg:px-10 outline-none bg-admin-blue-lite w-full font-bold h-12 focus:bg-white focus:text-black'
+                  className='px-1 md:px-10 outline-none bg-admin-blue-lite w-full font-bold h-12 focus:bg-white focus:text-black'
                   type='text'
                   value={lesson}
                   onChange={handleChange}
@@ -80,7 +83,7 @@ export default function DayCard({ day, setData, data, setAlert, parity }) {
                   type='submit'
                   name={index}
                   onClick={handleDeleteLesson}
-                  className='px-3 lg:px-4 py-3 bg-red-400 text-white'
+                  className='px-3 md:px-4 py-3 bg-red-400 text-white'
                   value='-'
                 />
               </td>
@@ -89,7 +92,7 @@ export default function DayCard({ day, setData, data, setAlert, parity }) {
                   type='submit'
                   name={index}
                   onClick={handleAddLesson}
-                  className='px-3 lg:px-4 py-3 bg-blue-400 text-white'
+                  className='px-3 md:px-4 py-3 bg-blue-400 text-white'
                   value='+'
                 />
               </td>

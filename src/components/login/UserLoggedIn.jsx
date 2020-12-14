@@ -18,7 +18,9 @@ export default function UserLoggedIn({
         <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
           <div className={`${changeIsOpen ? 'hidden' : 'block'}`}>
             <h1 className='mb-4 text-3xl text-center'>Логин {username}</h1>
-            <h1 className='mb-8 text-3xl text-center'>Группа {group}</h1>
+            <h1 className='mb-8 text-3xl text-center'>
+              Группа {group.toUpperCase()}
+            </h1>
             <button
               onClick={() => setChangeIsOpen(true)}
               className='w-full text-center py-3 rounded bg-yellow-400 text-white hover:bg-yellow-500 focus:outline-none my-1'>

@@ -5,7 +5,7 @@ import backImg from '../img/back.png'
 
 export default function LoginRegisterHeader() {
   return (
-    <div className='bg-admin-blue w-full h-24 flex items-center'>
+    <div className='bg-admin-blue w-full h-14 lg:h-24 flex items-center'>
       <Link
         to='/'
         className='flex hover-img-invert flex-row items-center lg:w-24 '>

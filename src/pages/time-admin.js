@@ -42,11 +42,41 @@ export default function TimeAdmin({ location }) {
     }
     return (
       <div>
-        <h1 className='w-full pt-4 px-4 h-24 lg:h-24 bg-admin-blue capitalize font-medium text-2xl lg:text-4xl flex items-center text-white'>
-          <span className='lg:ml-16'>
-            Время <span className='uppercase'>{group}</span>{' '}
-          </span>
-        </h1>
+        <div className='flex px-4 bg-admin-blue py-1 py-2 lg:py-4 items-center justify-between'>
+          <Link
+            to='/'
+            className='flex hover-img-invert flex-row items-center lg:w-24 '>
+            <img className='mr-1 w-6 h-6' src={backImg} alt='back' />
+            <img
+              id='home'
+              className='w-8 h-8 pb-1 lg:w-10 lg:h-10 mr-3'
+              src={homeImg}
+              alt='home'
+            />
+          </Link>
+          <h1 className='pt-1 capitalize font-medium text-2xl font-bold lg:text-3xl flex items-center text-white'>
+            <span>
+              Время <span className='uppercase'>{group}</span>{' '}
+            </span>
+          </h1>
+          <div className='flex flex-row px-2'>
+            <Link to={{ pathname: '/calendar', state: { parity: 'even' } }}>
+              <img
+                className='hover-img-invert w-8 h-8 lg:w-10 lg:h-10 mr-1'
+                src={calendar_even}
+                alt='calendar-even'
+              />
+            </Link>
+
+            <Link to={{ pathname: '/calendar', state: { parity: 'odd' } }}>
+              <img
+                className='hover-img-invert w-8 h-8 lg:w-10 lg:h-10'
+                src={calendar_odd}
+                alt='calendar-odd'
+              />
+            </Link>
+          </div>
+        </div>
         <Alert
           alert={alert}
           setAlert={setAlert}
@@ -55,34 +85,6 @@ export default function TimeAdmin({ location }) {
           text={``}
           position='fixed bottom-12 left-0'
         />
-        <div className='flex px-4 bg-admin-blue py-1 pb-3 lg:py-4 items-center'>
-          <Link
-            to='/'
-            className='flex hover-img-invert flex-row items-center lg:w-24 '>
-            <img className='mr-1 mt-1 w-6 h-6' src={backImg} alt='back' />
-            <img
-              id='home'
-              className='w-8 h-8 lg:w-10 lg:h-10 mr-3'
-              src={homeImg}
-              alt='home'
-            />
-          </Link>
-          <Link to={{ pathname: '/calendar', state: { parity: 'even' } }}>
-            <img
-              className='hover-img-invert w-8 h-8 lg:w-10 lg:h-10 mr-1'
-              src={calendar_even}
-              alt='calendar-even'
-            />
-          </Link>
-
-          <Link to={{ pathname: '/calendar', state: { parity: 'odd' } }}>
-            <img
-              className='hover-img-invert w-8 h-8 lg:w-10 lg:h-10'
-              src={calendar_odd}
-              alt='calendar-odd'
-            />
-          </Link>
-        </div>
 
         <div className='wrapper mt-4 mb-20 lg:my-20'>
           <PairCards data={items} setData={setItems} />

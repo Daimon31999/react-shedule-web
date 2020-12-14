@@ -66,7 +66,7 @@ export default function CalendarAdmin({ location }) {
           text={``}
           position='fixed bottom-12 left-0'
         />
-        <h1 className='w-full pt-4 px-4 h-24 lg:h-24 bg-admin-blue capitalize font-medium text-2xl lg:text-4xl flex items-center text-white'>
+        {/* <h1 className='w-full pt-4 px-4 h-24 lg:h-24 bg-admin-blue capitalize font-medium text-2xl lg:text-4xl flex items-center text-white'>
           <span className='ml-2 lg:ml-16'>
             Рассписание {parity === 'even' ? 'Парной' : 'Непарной'} недели{' '}
             {group}{' '}
@@ -94,6 +94,41 @@ export default function CalendarAdmin({ location }) {
               alt='clock'
             />
           </Link>
+        </div> */}
+        <div className='flex pl-2 lg:pl-4 bg-admin-blue py-1 py-2 lg:py-4 items-center justify-between'>
+          <Link
+            to='/'
+            className='flex hover-img-invert flex-row items-center lg:w-24 '>
+            <img className='mr-1 w-6 h-6' src={backImg} alt='back' />
+            <img
+              id='home'
+              className='w-8 h-8 pb-1 lg:w-10 lg:h-10 mr-3'
+              src={homeImg}
+              alt='home'
+            />
+          </Link>
+          <h1 className='pt-1 mx-6 capitalize font-medium text-2xl font-bold lg:text-3xl flex items-center text-white'>
+            <span className='hidden lg:block'>Календарь&nbsp;</span>
+            <span>
+              {parity === 'even' ? 'Парная' : 'Непарная'}
+              {` неделя ${group.toUpperCase()}`}
+            </span>
+          </h1>
+          <div className='flex flex-row'>
+            <Link
+              to={{
+                pathname: '/time',
+                state: { parity: location.state.parity },
+              }}
+              className='flex flex-row items-center pr-4 lg:pr-10 '>
+              <img
+                id='home'
+                className='w-8 h-8 lg:w-10 lg:h-10 hover-img-invert'
+                src={clockImg}
+                alt='clock'
+              />
+            </Link>
+          </div>
         </div>
 
         <div className='wrapper mt-20'>{mapDays()}</div>

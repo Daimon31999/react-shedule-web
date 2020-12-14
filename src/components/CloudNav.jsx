@@ -25,7 +25,11 @@ export default function CloudNav({ items, dayOfWeek, parity, group }) {
           <Link
             to='/login'
             className='relative w-10 h-10 lg:w-12 lg:h-12 flex justify-center items-center mr-2 lg:mr-4'>
-            <img className='absolute' src={ellipseImg} alt='' />
+            <img
+              className='absolute focus:outline-none'
+              src={ellipseImg}
+              alt=''
+            />
             <span className='absolute uppercase cursor-pointer lg:leading-tight leading-tight text-xs lg:text-base text-center font-bold text-lite-white'>
               {group ? (
                 <span>

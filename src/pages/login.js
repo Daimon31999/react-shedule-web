@@ -11,13 +11,10 @@ import '../css/App.css'
 export default function Login() {
   const [loginUsername, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
-  const [loginGroup, setLoginGroup] = useState('')
   const [changeGroup, setChangeGroup] = useState('')
   const [changeLogin, setChangeLogin] = useState('')
   const [changeIsOpen, setChangeIsOpen] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
-
-  console.log('process.env.REACT_APP_BASE_URL', process.env.REACT_APP_BASE_URL)
 
   const [alert, setAlert] = useState(false)
   const [error, setError] = useState(false)
@@ -29,7 +26,6 @@ export default function Login() {
       data: {
         username: loginUsername,
         password: loginPassword,
-        group: loginGroup,
       },
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/login`,
@@ -152,8 +148,6 @@ export default function Login() {
                 />
               ) : (
                 <UserNotLoggedIn
-                  setLoginGroup={setLoginGroup}
-                  loginGroup={loginGroup}
                   setLoginPassword={setLoginPassword}
                   loginPassword={loginPassword}
                   setLoginUsername={setLoginUsername}

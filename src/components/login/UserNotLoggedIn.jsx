@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function UserNotLoggedIn({
-  setLoginGroup,
-  loginGroup,
   setLoginPassword,
   loginPassword,
   setLoginUsername,
@@ -33,19 +31,10 @@ export default function UserNotLoggedIn({
             onChange={(e) => setLoginPassword(e.target.value)}
           />
 
-          <input
-            type='text'
-            className='block border border-grey-light w-full p-3 rounded mb-4'
-            name='group'
-            placeholder='Группа'
-            value={loginGroup}
-            onChange={(e) => setLoginGroup(e.target.value)}
-          />
-
           <button
             onClick={login}
             type='submit'
-            className='w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-800 focus:outline-none my-1'>
+            className='w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-800 focus:outline-none focus:bg-green-800 my-1'>
             Войти
           </button>
         </div>
