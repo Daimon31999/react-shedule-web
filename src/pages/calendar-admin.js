@@ -110,7 +110,7 @@ export default function CalendarAdmin({ location }) {
           <h1 className='pt-1 mx-6 capitalize font-medium text-2xl font-bold lg:text-3xl flex items-center text-white'>
             <span className='hidden lg:block'>Календарь&nbsp;</span>
             <span>
-              {parity === 'even' ? 'Парная' : 'Непарная'}
+              {parity === 'even' ? 'Четная' : 'Нечетная'}
               {` неделя ${group.toUpperCase()}`}
             </span>
           </h1>

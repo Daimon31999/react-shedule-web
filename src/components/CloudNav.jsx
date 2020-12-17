@@ -15,7 +15,7 @@ export default function CloudNav({ items, dayOfWeek, parity, group }) {
       <nav className='cloud w-28 lg:w-48 lg:h-48 flex flex-col items-center'>
         <img src={cloudImg} alt='' />
         <span className='absolute text-center leading-tight font-bold text-lite-white text-base lg:text-3xl mt-16 lg:mt-24'>
-          {parity === 'even' ? 'Парная' : 'Непарная'}
+          {parity === 'even' ? 'Четная' : 'Нечетная'}
         </span>
 
         <span className='week-day -mt-4 lg:-mt-6 mb-2 text-lite-blue font-bold'>
