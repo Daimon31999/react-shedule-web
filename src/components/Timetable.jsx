@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../static/tailwind.css'
 import moment from 'moment'
 
 export default function Timetable({ timetable, breakIndex, setBreakIndex }) {
+  useEffect(() => {}, [breakIndex, timetable])
+
   // 4 -> 04
   const formatTime = (time) => {
     time = time.split(':')
@@ -52,9 +54,11 @@ export default function Timetable({ timetable, breakIndex, setBreakIndex }) {
               <span
                 key={row[0] + row[1] + index}
                 className={
-                  whatPairIs(timetable) === index ? 'font-bold text-blue' : ''
+                  whatPairIs(timetable) === index
+                    ? 'font-bold text-blue'
+                    : 'font-normal'
                 }>
-                {count}
+                {index + 1}
                 {') '}
                 {formatTime(row[0])} — {formatTime(row[1])}
                 {breakIndex - 1 === index ? (
@@ -62,9 +66,7 @@ export default function Timetable({ timetable, breakIndex, setBreakIndex }) {
                     <span className='absolute -left-6 top-0'>→</span>
                     перемена 🥳
                   </div>
-                ) : (
-                  ''
-                )}
+                ) : null}
               </span>
             )
           } else {

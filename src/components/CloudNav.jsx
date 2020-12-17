@@ -18,7 +18,7 @@ export default function CloudNav({ items, dayOfWeek, parity, group }) {
           {parity === 'even' ? 'Четная' : 'Нечетная'}
         </span>
 
-        <span className='week-day -mt-4 lg:-mt-6 mb-2 text-lite-blue font-bold'>
+        <span className='week-day -mt-4 lg:-mt-6 mb-2 text-sm lg:text-base text-lite-blue font-bold'>
           {translateToRussian[dayOfWeek]}
         </span>
         <div className='round-items flex justify-around'>

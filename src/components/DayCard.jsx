@@ -48,12 +48,12 @@ export default function DayCard({ day, setData, data, setAlert, parity }) {
   }
   return (
     <div>
-      <div className='h-16 bg-admin-blue-lite text-admin-blue font-bold border-4 border-admin-blue md:mx-6 md:mx-10 my-6 flex items-center px-4 md:px-10 text-2xl capitalize'>
+      <div className='h-16 bg-admin-blue-lite text-admin-blue font-bold border-4 border-admin-blue md:mx-6 md:mx-10 my-6 flex items-center px-4 md:px-10 text-2xl'>
         <span>{translateToRussian[day]}</span>
       </div>
       <table className='w-auto mx-4 md:mx-20 border-separate'>
         <tbody>
-          <tr className='h-14 bg-admin-blue-lite text-black font-bold mx-4 md:mx-20 px-1 md:px-10 text-base md:text-xl capitalize'>
+          <tr className='h-14 bg-admin-blue-lite text-black font-bold mx-4 md:mx-20 px-1 md:px-10 text-base md:text-xl'>
             <th className='px-1 lg:px-10 text-center'>пара</th>
             <th className='px-1 lg:px-10 text-left hidden md:table-cell'>
               сокращение
@@ -66,7 +66,7 @@ export default function DayCard({ day, setData, data, setAlert, parity }) {
           {data.shedule[parity][day].map((lesson, index) => (
             <tr
               key={index}
-              className='h-14 bg-admin-blue-lite text-admin-blue font-bold text-base md:text-xl capitalize'>
+              className='h-14 bg-admin-blue-lite text-admin-blue font-bold text-base md:text-xl'>
               <td className='px-1 md:px-10'>{index + 1}</td>
               <td className='px-1 md:px-10'>{getAbbreviation(lesson)}</td>
               <td className='w-100'>

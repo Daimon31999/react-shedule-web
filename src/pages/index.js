@@ -90,6 +90,7 @@ export default function Home() {
               timetable={timetable}
               dayOfWeek={getDayOfWeek()}
               breakIndex={breakIndex}
+              setBreakIndex={setBreakIndex}
               parity={parity()}
             />
             <Timetable

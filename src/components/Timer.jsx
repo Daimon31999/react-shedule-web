@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import '../static/tailwind.css'
 import useInterval from './../hooks/useInterval'
 import moment from 'moment'
-import ReactTooltip from 'react-tooltip'
 
 export default function Timer({
   timetable,
   items,
   dayOfWeek,
   breakIndex,
+  setBreakIndex,
   parity,
 }) {
   const [resultTime, setResultTime] = useState()
   const [pair, setPair] = useState(null)
-
-  useEffect(() => {
-    repeatingFunc()
-  }, [])
+  const [showTooltip, setShowTooltip] = useState(false)
 
   // TODO убрать повторение (в DayCard)
   const getAbbreviation = (sentence) => {
@@ -47,7 +44,7 @@ export default function Timer({
         </div>
       )
     }
-    // '' | undefined
+    // '' | undefined | null
     else {
       return (
         <span className='text-4xl flex items-start'>
@@ -91,7 +88,13 @@ export default function Timer({
       if (dayOfWeek === 'воскресение') {
         pairName = ': )'
       } else pairName = items.shedule[parity][dayOfWeek][index]
-      setPair(pairName)
+      if (result === '00:00:00') {
+        setBreakIndex(pairIndex + 1)
+        setPair(null)
+      } else {
+        setPair(pairName)
+        setBreakIndex(null)
+      }
     }
   }
 
@@ -104,7 +107,17 @@ export default function Timer({
     lg:text-6xl font-bold text-blue flex flex-col lg:justify-end '>
       <div className='flex items-center lg:justify-between'>
         <span>{print()}</span>
-        <a data-tip data-for='my_info' data-event='click focus'>
+        <a
+          className='relative'
+          onClick={() => setShowTooltip((prev) => !prev)}
+          onMouseOver={() => setShowTooltip(true)}
+          onMouseOut={() => setShowTooltip(false)}>
+          <div
+            className={`${
+              showTooltip ? 'absolute' : 'hidden'
+            } bottom-14 left-0 w-auto h-auto bg-admin-blue text-base text-white px-4 py-1 `}>
+            <span>{pair}</span>
+          </div>
           <svg
             height='40'
             width='40'
@@ -120,17 +133,6 @@ export default function Timer({
             </text>
           </svg>
         </a>
-
-        <ReactTooltip
-          id='my_info'
-          place='top'
-          // clickable='true'
-          type='info'
-          effect='solid'
-          textColor='#fff'
-          backgroundColor='#017383'>
-          <span>{pair}</span>
-        </ReactTooltip>
       </div>
 
       <span>{pair && resultTime}</span>

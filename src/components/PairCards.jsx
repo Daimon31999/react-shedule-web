@@ -87,7 +87,7 @@ export default function PairCards({ day, setData, data }) {
     <div>
       <table className='w-auto md:mx-28 border-separate'>
         <tbody>
-          <tr className='h-14 bg-admin-blue-lite text-black font-bold mx-20 px-1 lg:px-10 text-xl capitalize'>
+          <tr className='h-14 bg-admin-blue-lite text-black font-bold mx-20 px-1 lg:px-10 text-xl'>
             <th className='px-1 lg:px-10'>пара</th>
             <th className='px-1 lg:px-10'>начало</th>
             <th className='px-1 lg:px-10'>конец</th>
