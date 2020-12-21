@@ -38,7 +38,7 @@ export default function UserLoggedIn({
             />
             <input
               type='text'
-              className='block border border-grey-light w-full p-3 rounded mb-4'
+              className='block border border-grey-light w-full p-3 rounded mb-4 uppercase'
               name='group'
               placeholder='Группа'
               value={changeGroup}

@@ -32,9 +32,9 @@ export default function Login() {
     })
       .then((res) => {
         getUser()
-        // let str = window.location.href
-        // let splitted = str.split('login').join('')
-        // window.location.href = splitted
+        let str = window.location.href
+        let splitted = str.split('login').join('')
+        window.location.href = splitted
       })
       .catch((err) => {
         setError(true)
