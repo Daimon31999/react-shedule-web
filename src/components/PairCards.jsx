@@ -1,4 +1,5 @@
 import React from 'react'
+import InputMask from 'react-input-mask'
 import '../css/DayCard.module.css'
 
 export default function PairCards({ day, setData, data }) {
@@ -36,20 +37,24 @@ export default function PairCards({ day, setData, data }) {
           className='h-14 bg-admin-blue-lite text-center text-admin-blue font-bold text-xl capitalize'>
           <td className='px-1 lg:px-10'>{index + 1}</td>
           <td className='px-1 lg:px-10'>
-            <input
+            <InputMask
               size='3'
               className='px-1 lg:px-10 text-center outline-none bg-admin-blue-lite font-bold h-12 focus:bg-white focus:text-black'
-              type='text'
+              // type='text'
+              mask='99:99'
+              // maskChar=' '
               value={row[0]}
               onChange={handleChange}
               name={`${index}0`}
             />
           </td>
           <td className='w-100'>
-            <input
+            <InputMask
               size='3'
               className='px-1 lg:px-10 text-center outline-none bg-admin-blue-lite font-bold h-12 focus:bg-white focus:text-black'
-              type='text'
+              mask='99:99'
+              // maskChar=' '
+              // type='text'
               value={row[1]}
               onChange={handleChange}
               name={`${index}1`}
