@@ -19,9 +19,11 @@ export default function Login() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   const [alert, setAlert] = useState(false)
-  const [error, setError] = useState(false)
+  const [loginError, setLoginError] = useState(false)
+  const [userAlreadyExistsError, setUserAlreadyExistsError] = useState(false)
 
   const [data, setData] = useState(null)
+
   const login = () => {
     Axios({
       method: 'POST',
@@ -39,7 +41,7 @@ export default function Login() {
         window.location.href = splitted
       })
       .catch((err) => {
-        setError(true)
+        setLoginError(true)
       })
   }
   const logout = () => {
@@ -67,11 +69,15 @@ export default function Login() {
       method: 'GET',
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/user`,
-    }).then((res) => {
-      console.log('user', res.data)
-      setData(res.data)
-      setIsLoaded(true)
     })
+      .then((res) => {
+        console.log('user', res.data)
+        setData(res.data)
+        setIsLoaded(true)
+      })
+      .catch((err) => {
+        setLoginError(true)
+      })
   }
 
   const saveChanges = () => {
@@ -83,11 +89,13 @@ export default function Login() {
       },
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/changeuser`,
-    }).then((res) => {
-      setChangeIsOpen(false)
-      setAlert(true)
-      getUser()
     })
+      .then((res) => {
+        setChangeIsOpen(false)
+        setAlert(true)
+        getUser()
+      })
+      .catch((err) => setUserAlreadyExistsError(true))
   }
 
   useEffect(() => {
@@ -133,8 +141,8 @@ export default function Login() {
                 text={`Новый логин «${changeLogin}» новая группа «${changeGroup}»`}
               />
               <Alert
-                alert={error}
-                setAlert={setError}
+                alert={loginError}
+                setAlert={setLoginError}
                 heading='Ошибка!'
                 type='error'
                 text={`Неверный логин или пароль`}
@@ -152,6 +160,8 @@ export default function Login() {
                     setChangeLogin={setChangeLogin}
                     changeIsOpen={changeIsOpen}
                     setChangeIsOpen={setChangeIsOpen}
+                    userAlreadyExistsError={userAlreadyExistsError}
+                    setUserAlreadyExistsError={setUserAlreadyExistsError}
                   />
                 ) : (
                   <UserNotLoggedIn

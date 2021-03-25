@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Alert from '../Alert'
 
 export default function UserLoggedIn({
   username,
@@ -11,11 +12,37 @@ export default function UserLoggedIn({
   setChangeLogin,
   changeIsOpen,
   setChangeIsOpen,
+  userAlreadyExistsError,
+  setUserAlreadyExistsError,
 }) {
+  const [validationPassed, setValidationPassed] = useState(true)
+
+  const validateManyFields = (arr) => {
+    if (Array.isArray(arr)) {
+      let isOk = arr.every((str) => str && str.length > 3)
+      setValidationPassed(isOk)
+    }
+  }
+
+  const validate = (data) => {
+    if (typeof data === 'string') {
+      if (data && data.length > 3) return true
+      else return false
+    }
+  }
+
   return (
     <div>
       <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>
         <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
+          <Alert
+            alert={userAlreadyExistsError}
+            setAlert={setUserAlreadyExistsError}
+            heading='Ошибка!'
+            type='error'
+            text={`Пользователь с именем «${changeLogin}» уже существует`}
+          />
+
           <div className={`${changeIsOpen ? 'hidden' : 'block'}`}>
             <h1 className='mb-4 text-3xl text-center'>Логин {username}</h1>
             <h1 className='mb-8 text-3xl text-center'>
@@ -30,23 +57,42 @@ export default function UserLoggedIn({
           <div className={`${changeIsOpen ? 'block' : 'hidden'}`}>
             <input
               type='text'
-              className='border border-grey-light w-full p-3 rounded mb-4'
+              className={
+                'border w-full p-3 rounded mb-4 ' +
+                (validate(changeLogin) ? 'border-grey-light' : 'border-red-500')
+              }
               name='login'
               placeholder='Логин'
               value={changeLogin}
-              onChange={(e) => setChangeLogin(e.target.value)}
+              required
+              onChange={(e) => {
+                setChangeLogin(e.target.value)
+                validateManyFields([e.target.value, changeGroup])
+              }}
             />
             <input
               type='text'
-              className='block border border-grey-light w-full p-3 rounded mb-4 uppercase'
+              className={
+                'block border w-full p-3 rounded mb-4 uppercase ' +
+                (validate(changeGroup) ? 'border-grey-light' : 'border-red-500')
+              }
               name='group'
               placeholder='Группа'
               value={changeGroup}
-              onChange={(e) => setChangeGroup(e.target.value)}
+              required
+              onChange={(e) => {
+                setChangeGroup(e.target.value)
+                validateManyFields([changeLogin, e.target.value])
+              }}
             />
             <button
-              onClick={() => saveChanges()}
-              className='w-full text-center py-3 rounded bg-green-400 text-white hover:bg-green-500 focus:outline-none my-1'>
+              onClick={() => validationPassed && saveChanges()}
+              className={
+                (validationPassed
+                  ? 'hover:bg-green-500 bg-green-400'
+                  : 'bg-green-200 cursor-default') +
+                ' w-full text-center py-3 rounded text-white  focus:outline-none my-1'
+              }>
               Сохранить
             </button>
             <button

@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet'
 
 import { Link } from 'react-router-dom'
 import LoginRegisterHeader from './../components/LoginRegisterHeader'
+import Alert from './../components/Alert'
+
 import '../static/tailwind.css'
 import '../css/App.css'
 import Axios from 'axios'
@@ -11,6 +13,8 @@ export default function Register() {
   const [registerUsername, setRegisterUsername] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
   const [registerGroup, setRegisterGroup] = useState('')
+  const [error, setError] = useState(false)
+
   const register = () => {
     Axios({
       method: 'POST',
@@ -21,7 +25,10 @@ export default function Register() {
       },
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/register`,
-    }).then((res) => console.log(res))
+    }).then((res) => {
+      setError(true)
+      console.log(res)
+    })
   }
   return (
     <>
@@ -34,6 +41,14 @@ export default function Register() {
           <div className='bg-grey-lighter min-h-screen flex flex-col'>
             <LoginRegisterHeader />
 
+            <Alert
+              alert={error}
+              setAlert={setError}
+              heading='Ошибка!'
+              type='error'
+              text={`Пользователь с именем «${registerUsername}» уже существует`}
+            />
+
             <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>
               <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
                 <h1 className='mb-8 text-3xl text-center'>Регистрация</h1>
@@ -41,26 +56,26 @@ export default function Register() {
                   type='text'
                   className='block border border-grey-light w-full p-3 rounded mb-4'
                   name='login'
+                  required
                   placeholder='Логин'
                   onChange={(e) => setRegisterUsername(e.target.value)}
                 />
-
                 <input
                   type='password'
                   className='block border border-grey-light w-full p-3 rounded mb-4'
                   name='password'
+                  required
                   placeholder='Пароль'
                   onChange={(e) => setRegisterPassword(e.target.value)}
                 />
-
                 <input
                   type='text'
                   className='block border border-grey-light w-full p-3 rounded mb-4'
                   name='group'
+                  required
                   placeholder='Группа'
                   onChange={(e) => setRegisterGroup(e.target.value)}
                 />
-
                 <button
                   onClick={register}
                   type='submit'
