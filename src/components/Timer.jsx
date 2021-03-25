@@ -10,6 +10,7 @@ export default function Timer({
   breakIndex,
   setBreakIndex,
   parity,
+  playSound,
 }) {
   const [resultTime, setResultTime] = useState()
   const [pair, setPair] = useState(null)
@@ -91,6 +92,7 @@ export default function Timer({
       if (result === '00:00:00') {
         setBreakIndex(pairIndex + 1)
         setPair(null)
+        playSound()
       } else {
         setPair(pairName)
         setBreakIndex(null)

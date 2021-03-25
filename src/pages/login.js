@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet'
+
 import Axios from 'axios'
 import LoginRegisterHeader from './../components/LoginRegisterHeader'
 import UserLoggedIn from '../components/login/UserLoggedIn'
@@ -114,51 +116,57 @@ export default function Login() {
     )
   } else {
     return (
-      <div className='App'>
-        <div>
-          <div className='bg-grey-lighter min-h-screen flex flex-col'>
-            <LoginRegisterHeader />
-            <Alert
-              alert={alert}
-              setAlert={setAlert}
-              heading='Успешно сохраннено!'
-              type='success'
-              text={`Новый логин «${changeLogin}» новая группа «${changeGroup}»`}
-            />
-            <Alert
-              alert={error}
-              setAlert={setError}
-              heading='Ошибка!'
-              type='error'
-              text={`Неверный логин или пароль`}
-            />
-            <div>
-              {data ? (
-                <UserLoggedIn
-                  logout={logout}
-                  saveChanges={saveChanges}
-                  username={data.username}
-                  group={data.group}
-                  changeGroup={changeGroup}
-                  setChangeGroup={setChangeGroup}
-                  changeLogin={changeLogin}
-                  setChangeLogin={setChangeLogin}
-                  changeIsOpen={changeIsOpen}
-                  setChangeIsOpen={setChangeIsOpen}
-                />
-              ) : (
-                <UserNotLoggedIn
-                  setLoginPassword={setLoginPassword}
-                  loginPassword={loginPassword}
-                  setLoginUsername={setLoginUsername}
-                  loginUsername={loginUsername}
-                  login={login}
-                />
-              )}
+      <>
+        <Helmet>
+          <meta charSet='utf-8' />
+          <title>Login</title>
+        </Helmet>
+        <div className='App'>
+          <div>
+            <div className='bg-grey-lighter min-h-screen flex flex-col'>
+              <LoginRegisterHeader />
+              <Alert
+                alert={alert}
+                setAlert={setAlert}
+                heading='Успешно сохраннено!'
+                type='success'
+                text={`Новый логин «${changeLogin}» новая группа «${changeGroup}»`}
+              />
+              <Alert
+                alert={error}
+                setAlert={setError}
+                heading='Ошибка!'
+                type='error'
+                text={`Неверный логин или пароль`}
+              />
+              <div>
+                {data ? (
+                  <UserLoggedIn
+                    logout={logout}
+                    saveChanges={saveChanges}
+                    username={data.username}
+                    group={data.group}
+                    changeGroup={changeGroup}
+                    setChangeGroup={setChangeGroup}
+                    changeLogin={changeLogin}
+                    setChangeLogin={setChangeLogin}
+                    changeIsOpen={changeIsOpen}
+                    setChangeIsOpen={setChangeIsOpen}
+                  />
+                ) : (
+                  <UserNotLoggedIn
+                    setLoginPassword={setLoginPassword}
+                    loginPassword={loginPassword}
+                    setLoginUsername={setLoginUsername}
+                    loginUsername={loginUsername}
+                    login={login}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 }

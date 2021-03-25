@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
+
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 import ClockLoader from 'react-spinners/ClockLoader'
@@ -42,6 +44,10 @@ export default function TimeAdmin({ location }) {
     }
     return (
       <div>
+        <Helmet>
+          <meta charSet='utf-8' />
+          <title>Time Admin</title>
+        </Helmet>
         <div className='flex px-4 bg-admin-blue py-1 py-2 lg:py-4 items-center justify-between'>
           <Link
             to='/'

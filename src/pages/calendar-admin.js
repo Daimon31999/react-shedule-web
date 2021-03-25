@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import Axios from 'axios'
 import ClockLoader from 'react-spinners/ClockLoader'
 import SaveButton from '../components/SaveButton'
@@ -58,6 +59,10 @@ export default function CalendarAdmin({ location }) {
 
     return (
       <div className='mb-36'>
+        <Helmet>
+          <meta charSet='utf-8' />
+          <title>Calendar Admin</title>
+        </Helmet>
         <Alert
           alert={alert}
           setAlert={setAlert}
@@ -66,35 +71,6 @@ export default function CalendarAdmin({ location }) {
           text={``}
           position='fixed bottom-12 left-0'
         />
-        {/* <h1 className='w-full pt-4 px-4 h-24 lg:h-24 bg-admin-blue capitalize font-medium text-2xl lg:text-4xl flex items-center text-white'>
-          <span className='ml-2 lg:ml-16'>
-            Рассписание {parity === 'even' ? 'Парной' : 'Непарной'} недели{' '}
-            {group}{' '}
-          </span>
-        </h1>
-        <div className='flex px-4 bg-admin-blue py-1 pb-3 lg:py-4 items-center'>
-          <Link
-            to={{ pathname: '/' }}
-            className='flex hover-img-invert flex-row items-center w-20 lg:w-24 '>
-            <img className='mr-1 mt-1 w-6 h-6' src={backImg} alt="'back"></img>
-            <img
-              id='home'
-              className='w-8 h-8 lg:w-10 lg:h-10'
-              src={homeImg}
-              alt='home'
-            />
-          </Link>
-          <Link
-            to={{ pathname: '/time', state: { parity: location.state.parity } }}
-            className='flex flex-row items-center w-24 '>
-            <img
-              id='home'
-              className='w-8 h-8 lg:w-10 lg:h-10 hover-img-invert'
-              src={clockImg}
-              alt='clock'
-            />
-          </Link>
-        </div> */}
         <div className='flex pl-2 lg:pl-4 bg-admin-blue py-1 py-2 lg:py-4 items-center justify-between'>
           <Link
             to='/'

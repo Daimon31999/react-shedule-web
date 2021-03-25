@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
+
 import { Link } from 'react-router-dom'
 import LoginRegisterHeader from './../components/LoginRegisterHeader'
 import '../static/tailwind.css'
@@ -22,56 +24,62 @@ export default function Register() {
     }).then((res) => console.log(res))
   }
   return (
-    <div className='App'>
-      <div>
-        <div className='bg-grey-lighter min-h-screen flex flex-col'>
-          <LoginRegisterHeader />
+    <>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <title>Register</title>
+      </Helmet>
+      <div className='App'>
+        <div>
+          <div className='bg-grey-lighter min-h-screen flex flex-col'>
+            <LoginRegisterHeader />
 
-          <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>
-            <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
-              <h1 className='mb-8 text-3xl text-center'>Регистрация</h1>
-              <input
-                type='text'
-                className='block border border-grey-light w-full p-3 rounded mb-4'
-                name='login'
-                placeholder='Логин'
-                onChange={(e) => setRegisterUsername(e.target.value)}
-              />
+            <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>
+              <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
+                <h1 className='mb-8 text-3xl text-center'>Регистрация</h1>
+                <input
+                  type='text'
+                  className='block border border-grey-light w-full p-3 rounded mb-4'
+                  name='login'
+                  placeholder='Логин'
+                  onChange={(e) => setRegisterUsername(e.target.value)}
+                />
 
-              <input
-                type='password'
-                className='block border border-grey-light w-full p-3 rounded mb-4'
-                name='password'
-                placeholder='Пароль'
-                onChange={(e) => setRegisterPassword(e.target.value)}
-              />
+                <input
+                  type='password'
+                  className='block border border-grey-light w-full p-3 rounded mb-4'
+                  name='password'
+                  placeholder='Пароль'
+                  onChange={(e) => setRegisterPassword(e.target.value)}
+                />
 
-              <input
-                type='text'
-                className='block border border-grey-light w-full p-3 rounded mb-4'
-                name='group'
-                placeholder='Группа'
-                onChange={(e) => setRegisterGroup(e.target.value)}
-              />
+                <input
+                  type='text'
+                  className='block border border-grey-light w-full p-3 rounded mb-4'
+                  name='group'
+                  placeholder='Группа'
+                  onChange={(e) => setRegisterGroup(e.target.value)}
+                />
 
-              <button
-                onClick={register}
-                type='submit'
-                className='w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-800 focus:outline-none my-1'>
-                Зарегистрироваться
-              </button>
-            </div>
-            <div className='text-grey-dark mt-6'>
-              Уже есть аккаунт?{' '}
-              <Link to='/login'>
-                <span className='text-blue border-b border-admin-blue'>
-                  Войти.
-                </span>
-              </Link>
+                <button
+                  onClick={register}
+                  type='submit'
+                  className='w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-800 focus:outline-none my-1'>
+                  Зарегистрироваться
+                </button>
+              </div>
+              <div className='text-grey-dark mt-6'>
+                Уже есть аккаунт?{' '}
+                <Link to='/login'>
+                  <span className='text-blue border-b border-admin-blue'>
+                    Войти.
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

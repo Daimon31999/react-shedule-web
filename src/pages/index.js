@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import Axios from 'axios'
+import useSound from 'use-sound'
 import ClipLoader from 'react-spinners/ClipLoader'
+import { Helmet } from 'react-helmet'
 
 import Timer from '../components/Timer'
 import Timetable from '../components/Timetable'
@@ -8,13 +11,14 @@ import CloudNav from '../components/CloudNav'
 import sunImg from './../img/sun.png'
 import '../static/tailwind.css'
 import '../css/App.css'
-import Axios from 'axios'
+import tickSound from '../static/assets/tick-work.mp3'
 
 export default function Home() {
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [items, setItems] = useState([])
   const [breakIndex, setBreakIndex] = useState(null)
+  const [playSound] = useSound(tickSound)
 
   const getDayOfWeek = () => {
     let days = [
@@ -62,51 +66,61 @@ export default function Home() {
   margin-top: 40vh;
 `
     return (
-      <ClipLoader
-        css={override}
-        size={150}
-        color={'#1EA7C6'}
-        loading={!isLoaded}
-      />
+      <>
+        <ClipLoader
+          css={override}
+          size={150}
+          color={'#1EA7C6'}
+          loading={!isLoaded}
+        />
+      </>
     )
   } else if (items) {
     let timetable = items.timetable.slice(0)
     return (
-      <div id='index-wrapper'>
-        <div id='index'>
-          <div
-            className='main-container
+      <>
+        <Helmet>
+          <meta charSet='utf-8' />
+          <title>Schedule ⏰</title>
+        </Helmet>
+        <div id='index-wrapper'>
+          <div id='index'>
+            <div
+              className='main-container
         w-full
         flex flex-col lg:flex-row gap-40 flex-shrink-0
         '>
-            <CloudNav
-              items={items}
-              dayOfWeek={getDayOfWeek()}
-              parity={parity()}
-              group={items.group}
-            />
-            <Timer
-              items={items}
-              timetable={timetable}
-              dayOfWeek={getDayOfWeek()}
-              breakIndex={breakIndex}
-              setBreakIndex={setBreakIndex}
-              parity={parity()}
-            />
-            <Timetable
-              timetable={timetable}
-              breakIndex={breakIndex}
-              setBreakIndex={setBreakIndex}
-            />
+              <CloudNav
+                items={items}
+                dayOfWeek={getDayOfWeek()}
+                parity={parity()}
+                group={items.group}
+              />
+              <Timer
+                items={items}
+                timetable={timetable}
+                dayOfWeek={getDayOfWeek()}
+                breakIndex={breakIndex}
+                setBreakIndex={setBreakIndex}
+                playSound={playSound}
+                parity={parity()}
+              />
+              <Timetable
+                timetable={timetable}
+                breakIndex={breakIndex}
+                setBreakIndex={setBreakIndex}
+                playSound={playSound}
+              />
 
-            <img
-              className='sun hidden z-0 lg:block absolute top-0 right-0 lg:w-64 lg:h-64'
-              src={sunImg}
-              alt='sun'
-            />
+              <img
+                className='sun hidden z-0 lg:block absolute top-0 right-0 lg:w-64 lg:h-64'
+                src={sunImg}
+                alt='sun'
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </>
     )
   } else {
     let str = window.location.href

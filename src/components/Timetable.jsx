@@ -2,7 +2,12 @@ import React, { useEffect } from 'react'
 import '../static/tailwind.css'
 import moment from 'moment'
 
-export default function Timetable({ timetable, breakIndex, setBreakIndex }) {
+export default function Timetable({
+  timetable,
+  breakIndex,
+  setBreakIndex,
+  playSound,
+}) {
   useEffect(() => {}, [breakIndex, timetable])
 
   // 4 -> 04
@@ -33,6 +38,7 @@ export default function Timetable({ timetable, breakIndex, setBreakIndex }) {
         let breakEnd = moment(timetable[i + 1][0], shortFormat)
         if (now.isBetween(breakStart, breakEnd)) {
           setBreakIndex(i + 1)
+          playSound()
         }
       }
     }
