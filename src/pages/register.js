@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import LoginRegisterHeader from './../components/LoginRegisterHeader'
 import Alert from './../components/Alert'
 
@@ -14,6 +14,8 @@ export default function Register() {
   const [registerPassword, setRegisterPassword] = useState('')
   const [registerGroup, setRegisterGroup] = useState('')
   const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const history = useHistory()
 
   const register = () => {
     Axios({
@@ -25,10 +27,12 @@ export default function Register() {
       },
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_SERVER_URL}/register`,
-    }).then((res) => {
-      setError(true)
-      console.log(res)
     })
+      .then(() => setSuccess(true))
+      .catch((res) => {
+        setError(true)
+        console.log(res)
+      })
   }
   return (
     <>
@@ -47,6 +51,15 @@ export default function Register() {
               heading='Ошибка!'
               type='error'
               text={`Пользователь с именем «${registerUsername}» уже существует`}
+            />
+
+            <Alert
+              alert={success}
+              setAlert={setSuccess}
+              heading='Success'
+              type='success'
+              text='Пользователь успешно создан'
+              cb={() => history.push('/login')}
             />
 
             <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>

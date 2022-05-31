@@ -9,13 +9,23 @@ export default function Alert({
   alert,
   linkTo,
   position,
+  cb,
 }) {
   useEffect(() => {
     const timeout = setTimeout(() => {
+      typeof alert === 'boolean' &&
+        alert === true &&
+        cb &&
+        typeof cb === 'function' &&
+        cb()
+
       setAlert(false)
     }, 3000)
-    return () => clearTimeout(timeout)
+    return () => {
+      clearTimeout(timeout)
+    }
   }, [alert, setAlert])
+
   let bgColor = 'bg-yellow-200'
   let textColor = 'text-yellow-600'
   if (type) {
